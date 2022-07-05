@@ -14,9 +14,9 @@ const { body, validationResult } = require('express-validator');// this is to va
 // validator function to controll users input
 const validatorWithexpress = () => {
     return [
-        body('username').isEmail(),
-        body('password').isLength({min:7}),
-        body('description').isLength({min:2})
+        body('titre').isLength({min:4}),
+        body('description').isLength({min:10}),
+        body('etat').isLength({min:2})
     ];
 }
 
