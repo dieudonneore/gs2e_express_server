@@ -8,38 +8,15 @@ app.use(express.json());// let app use express.json to retrieve data in json for
 
 const port="2020";// create a port
 
-const { body, validationResult } = require('express-validator');// this is to validate all entries specify
+
 
 const tasks = require('./routes/tasksRouter');
+const expressValidator = require('./validators/expressValidator');
 const fieldValidator = require('./validators/fieldValidator');
-
-// validator function to controll users input
-const validatorWithexpress = () => {
-    return [
-        body('titre').isLength({min:4}),
-        body('description').isLength({min:10}),
-        body('etat').isLength({min:2})
-    ];
-}
+const { body, validationResult } = require('express-validator');
 
 app.use('/tasks', tasks);
 
-app.post('/gs2e/data', fieldValidator(),tasks);
-
-// post request to retrieve all the entries made by user
-app.post(
-    '/gs2e/data',// endpoints
-    validatorWithexpress()// validator function
-    ,
-    (req, res) => {
-            const errors = validationResult(req);
-            if (!errors.isEmpty()) {
-                return res.status(400).json({ errors: errors.array() });
-            }
-            res.json({
-                "message": req.body
-            })
-        }
-    )
+app.use('/gs2e/data', fieldValidator(),tasks);
 
 app.listen(port);

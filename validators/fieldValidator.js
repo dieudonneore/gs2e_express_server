@@ -1,3 +1,4 @@
+const { body } = require('express-validator');// this is to validate all entries specify
 // validator function to controll users input
 const fieldValidator = () => {
     return [
