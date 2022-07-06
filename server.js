@@ -10,6 +10,7 @@ const port="2020";// create a port
 
 const { body, validationResult } = require('express-validator');// this is to validate all entries specify
 
+const tasks = require('./routes/tasksRouter');
 
 // validator function to controll users input
 const validatorWithexpress = () => {
@@ -20,10 +21,7 @@ const validatorWithexpress = () => {
     ];
 }
 
-// get request to see if our server is working
-app.get('/', (req, res) => {
-    res.send("Hello world");
-})
+app.use('/tasks', tasks);
 
 // post request to retrieve all the entries made by user
 app.post(
@@ -41,4 +39,4 @@ app.post(
         }
     )
 
-app.listen(port)
+app.listen(port);
