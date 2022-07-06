@@ -23,6 +23,12 @@ const validatorWithexpress = () => {
 
 app.use('/tasks', tasks);
 
+app.post('/gs2e/data', (req, res) => {
+    res.status(200).json({
+        "message": req.body
+    })
+})
+
 // post request to retrieve all the entries made by user
 app.post(
     '/gs2e/data',// endpoints
