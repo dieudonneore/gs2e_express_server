@@ -11,6 +11,7 @@ const port="2020";// create a port
 const { body, validationResult } = require('express-validator');// this is to validate all entries specify
 
 const tasks = require('./routes/tasksRouter');
+const fieldValidator = require('./validators/fieldValidator');
 
 // validator function to controll users input
 const validatorWithexpress = () => {
@@ -23,11 +24,7 @@ const validatorWithexpress = () => {
 
 app.use('/tasks', tasks);
 
-app.post('/gs2e/data', (req, res) => {
-    res.status(200).json({
-        "message": req.body
-    })
-})
+app.post('/gs2e/data', fieldValidator(),tasks);
 
 // post request to retrieve all the entries made by user
 app.post(
